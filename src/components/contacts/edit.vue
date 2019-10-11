@@ -35,6 +35,7 @@
 
 <script>
 import axios from 'axios';
+import config from '../config/config.js';
 
 export default {
     props: {
@@ -49,7 +50,6 @@ export default {
                 location: ''
             },
             id: this.$route.params.id,
-            url: 'http://localhost:3000/',
         }
     },
 
@@ -60,7 +60,7 @@ export default {
     methods: {
 
         edit() {
-            axios.get(this.url + 'contacts/' + this.id).then( (response) => {
+            axios.get(config.URLAPI + 'contacts/' + this.id).then( (response) => {
                 this.form.name = response.data.name;
                 this.form.phone = response.data.phone;
                 this.form.location = response.data.location;
@@ -68,7 +68,7 @@ export default {
         },
         
         update() {
-            axios.put(this.url + 'contacts/' + this.id, this.form)
+            axios.put(config.URLAPI + 'contacts/' + this.id, this.form)
             .then( (response) => {
                 alert(response.data.message);
                 this.$router.push('/contacts');

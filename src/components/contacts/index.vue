@@ -45,6 +45,7 @@
 
 <script>
 import axios from 'axios';
+import config from '../config/config.js';
 import createContact from './create';
 
 export default {
@@ -56,7 +57,6 @@ export default {
         return {
             contacts: [],
             modal: false,
-            url: 'http://localhost:3000/',
         }
     },
 
@@ -66,7 +66,7 @@ export default {
 
     methods: {
         index() {
-            axios.get(this.url + 'contacts').then( (response) => {
+            axios.get(config.URLAPI + 'contacts').then( (response) => {
                 this.contacts = response.data;
             });
         },
@@ -86,7 +86,7 @@ export default {
         destroy(id) {
 
             if(confirm('¿Estas seguro de eliminar este contacto?')) {
-                axios.delete(this.url + 'contacts/' + id).then( (response) => {
+                axios.delete(config.URLAPI + 'contacts/' + id).then( (response) => {
                     alert(response.data.message);
                     this.index();
                 });

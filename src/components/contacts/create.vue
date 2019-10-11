@@ -40,6 +40,7 @@
 
 <script>
 import axios from 'axios';
+import config from '../config/config.js';
 
 export default {
     props: {
@@ -53,14 +54,13 @@ export default {
                 phone: '',
                 location: ''
             },
-            url: 'http://localhost:3000/',
         }
     },
 
     methods: {
         
         store() {
-            axios.post(this.url + 'contacts', this.form)
+            axios.post(config.URLAPI + 'contacts', this.form)
             .then( (response) => {
                 this.form.name = '';
                 this.form.phone = '';
